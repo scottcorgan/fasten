@@ -1,0 +1,27 @@
+{
+  "name": "fasten",
+  "version": "0.0.0",
+  "description": "fasten ======",
+  "main": "app.js",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottcorgan/fasten.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/scottcorgan/fasten/issues"
+  },
+  "dependencies": {
+    "mongoose": "~3.8.0",
+    "feedback": "~0.3.0",
+    "express": "~3.4.4",
+    "socket.io": "~0.9.16"
+  }
+}
