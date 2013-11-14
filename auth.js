@@ -11,7 +11,10 @@ module.exports = function (fastener, host, callback) {
     .once('value', function (snapshot) {
       var hook = snapshot.val();
       
-      if (!hook || host !== hook.domain || fastener.token !== hook.token) return callback();
+      if (!hook || hook.domains.indexOf(host) < 0 || fastener.token !== hook.token) {
+        return callback(true);
+      }
+      
       callback(null, hook);
     });
 };

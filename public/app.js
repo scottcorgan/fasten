@@ -37,7 +37,6 @@ angular.module('Fasten')
         $timeout(function () {
           $scope.User.set(user);
           $scope.resetForm();
-          $scope.hookupFasten();
         });
       }
     });
@@ -71,17 +70,6 @@ angular.module('Fasten')
       $scope.auth.logout();
       $scope.User.set(null);
     };
-    
-    $scope.hookupFasten = function () {
-      // if (!$scope.user || !$scope.user.firebaseAuthToken) return;
-      
-      // $scope.fasten = new Fasten('scottcorgan/github/column', $scope.user.firebaseAuthToken);
-
-      // $scope.fasten.hook(function (data) {
-      //   $scope.data.push(data);
-      //   $scope.$apply();
-      // });
-    };
   });
 
 angular.module('Fasten')
@@ -94,66 +82,46 @@ angular.module('Fasten')
       
       userWatcher();
       
-      fastenRef
-        .child('users')
-        .child($scope.User.getEmail())
-        .child('hooks')
-        .on('value', function (snapshot) {
-          var hooks = snapshot.val();
-          if (!hooks) return;
-          
-          Object.keys(hooks).forEach(function (token) {
-            fastenRef
-              .child('hooks')
-              .child(token)
-              .on('value', function (snapshot) {
-                var hook = snapshot.val();
-                
-                $timeout(function () {
-                  $scope.hooks.push(hook);
-                });
-              });
-            
-          });
-        });
+      $http.get('/hooks', {
+        headers: {
+          authorization: user.firebaseAuthToken
+        }
+      }).success(function (hooks) {
+        $scope.hooks = hooks;
+      });
     });
 
     $scope.createHook = function () {
-      // TODO: move to the backend
-      
-      $http.get('/encode', {
-        params: {
-          path: $scope.newHookEndpoint
-        }
-      }).success(function (encodedEndpoint) {
-        $http.post('/token').success(function (token) {
-          var userRef = fastenRef.child('users').child($scope.User.getEmail());
-          var hookRef = fastenRef.child('hooks').child(encodedEndpoint);
-          
-          userRef.child('hooks').child(encodedEndpoint).set(true);
-          hookRef.set({
-            title: $scope.newHookTitle,
-            endpoint: $scope.newHookEndpoint,
-            domain: $scope.newHookDomain,
-            token: token
-          });
-        });
+      var domains = _.map($scope.newHookDomain.split(','), function (domain) {
+        return domain.replace(/ /g, '');
       });
       
+      $http.post('/hooks', {
+        title: $scope.newHookTitle,
+        endpoint: $scope.newHookEndpoint,
+        domains: domains,
+      }, {
+        headers: {
+          authorization: $scope.User.get().firebaseAuthToken
+        }
+      }).success(function (hook) {
+        $scope.hooks.push(hook);
+        $scope.resetNewHookValues();
+        $scope.showHookComposer = false;
+      });
     };
     
     $scope.removeHook = function (hook) {
-      // fastenRef
-      //   .child('users')
-      //   .child($scope.User.getEmail())
-      //   .child('hooks')
-      //   .child(hook.token)
-      //   .remove();
+      if (!confirm('Are you sure you want to delete this?')) return;
       
-      // fastenRef
-      //   .child('hooks')
-      //   .child(hook.token)
-      //   .remove();
+      $http.delete('/hooks/' + hook.endpoint, {
+        headers: {
+          authorization: $scope.User.get().firebaseAuthToken
+        }
+      }).success(function () {
+        var idx = $scope.hooks.indexOf(hook);
+        $scope.hooks.splice(idx, 1);
+      });
     };
     
     $scope.resetNewHookValues = function () {

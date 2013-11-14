@@ -10,6 +10,7 @@
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
     <script src="/app.js"></script>
 </head>
 <body>
@@ -58,7 +59,7 @@
           You have no hooks.
         </div>
         
-        <div ng-repeat="hook in hooks">
+        <div ng-repeat="hook in hooks | orderBy:'created_at'">
           - <strong>{{hook.title}}:</strong> {{hook.endpoint}} (<span ng-show="showToken">{{hook.token}}</span><a href="" ng-hide="showToken" ng-click="showToken = true">show token</a>) (<a href="" ng-click="removeHook(hook)">Delete</a>)
         </div>
       </div>

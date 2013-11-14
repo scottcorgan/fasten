@@ -1,4 +1,4 @@
-var fasten = Fasten.connect('github/column', 'e89d4a5ef5830e75b5356040f6f911d9');
+var fasten = Fasten.connect('github/column', '3044a27eb5172359e28285c639722d95');
 
 fasten.hook(function (data) {
   console.log('=======================================')
