@@ -1,9 +1,35 @@
 var fastenRef = new Firebase('https://fasten.firebaseio.com');
 
-var app = angular.module('Fasten', []);
+var app = angular.module('Fasten', ['ngRoute']);
 
 angular.module('Fasten')
-  .factory('User', function () {
+  .config(function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    
+    $routeProvider
+      .when('/', {
+        templateUrl: '/templates/home.html',
+        resolve: {
+          user: function ($q, $location) {
+            var d = $q.defer();
+            
+            var auth = new FirebaseSimpleLogin(fastenRef, function(err, user) {
+              if (err) console.error('need to login');
+              if (!user) $location.path('/login');
+              if (user) d.resolve(user);
+            });
+            
+            return d.promise;
+          }
+        }
+      })
+      .when('/login', {
+        templateUrl: '/templates/login.html'
+      });
+  });
+
+angular.module('Fasten')
+  .factory('User', function ($q) {
     var _user;
     
     return {
