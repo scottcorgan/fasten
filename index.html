@@ -16,22 +16,18 @@
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <div class="grid columns split250">
+  <div class="grid rows split70">
     <header class="bar">
-      <h1>Fasten</h1>
-      <nav>
-        <a href="/hooks">Home</a><br>
-        <a href="/settings">Settings</a><br>
+      <nav style="float:right">
+        <a href="/settings">Settings</a>
         <a href="" ng-click="User.logout()">Logout</a>
       </nav>
+      <h1><a href="/hooks">Fasten</a></h1>
     </header>
-    
     <section class="content">
       <div ng-view></div>
     </section>
-    
   </div>
-
   
 </body>
 </html>
