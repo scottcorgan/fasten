@@ -6,6 +6,9 @@
     
     <title>Fasten webhooks to web sockets</title>
     
+    <link rel="stylesheet" href="/styles/molten.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
@@ -13,8 +16,22 @@
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <h1>Fasten.io</h1>
-  <div ng-view></div>
+  <div class="grid columns split250">
+    <header class="bar">
+      <h1>Fasten</h1>
+      <nav>
+        <a href="/hooks">Home</a><br>
+        <a href="/settings">Settings</a><br>
+        <a href="" ng-click="User.logout()">Logout</a>
+      </nav>
+    </header>
+    
+    <section class="content">
+      <div ng-view></div>
+    </section>
+    
+  </div>
+
   
 </body>
 </html>

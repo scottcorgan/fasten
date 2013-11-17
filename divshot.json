@@ -4,6 +4,8 @@
   "clean_urls": true,
   "cache_control": {},
   "routes": {
+    "/hooks**": "/index.html",
+    "/hooks/**": "/index.html",
     "/login": "/index.html",
     "/settings": "/index.html"
   }

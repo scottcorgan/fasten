@@ -1,9 +1,4 @@
 <div ng-controller="HooksCtrl">
-  Hello {{User.get().email}} <br>
-  <a href="/settings">Settings</a>
-  <a href="" ng-click="User.logout()">Logout</a>
-  <hr>
-  
   <h3>Hooks</h3>
   
   <a href="" ng-click="showHookComposer = true">Add a new hook</a>
@@ -28,6 +23,6 @@
   </div>
   
   <div ng-repeat="hook in hooks | orderBy:'created_at'">
-    - <strong>{{hook.title}}:</strong> {{hook.endpoint}} (<span ng-show="showToken">{{hook.token}}</span><a href="" ng-hide="showToken" ng-click="showToken = true">show token</a>) (<a href="" ng-click="removeHook(hook)">Delete</a>)
+    - <a ng-href="/hooks/{{hook.endpoint}}">{{hook.title}}:</a> {{hook.endpoint}} (<span ng-show="showToken">{{hook.token}}</span><a href="" ng-hide="showToken" ng-click="showToken = true">show token</a>) (<a href="" ng-click="removeHook(hook)">Delete</a>)
   </div>
 </div>

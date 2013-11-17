@@ -675,11 +675,14 @@ angular.module('Fasten')
     $locationProvider.html5Mode(true);
     
     $routeProvider
-      .when('/', {
-        templateUrl: '/templates/home.html',
+      .when('/hooks', {
+        templateUrl: '/templates/hooks.html',
         resolve: {
           user: authenciateUser
         }
+      })
+      .when('/hooks/:endpoint*', {
+        templateUrl: '/templates/hook.html'
       })
       .when('/login', {
         templateUrl: '/templates/login.html'
@@ -688,7 +691,7 @@ angular.module('Fasten')
         templateUrl: '/templates/settings.html'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/hooks'
       });
     
     narratorProvider.configure({
@@ -709,6 +712,10 @@ angular.module('Fasten')
   .controller('AppCtrl', function ($scope, $rootScope, User, $location) {
     $scope.User = User;
     
+  });
+angular.module('Fasten')
+  .controller('HookCtrl', function ($scope, $routeParams) {
+    $scope.endpoint = $routeParams.endpoint;
   });
 angular.module('Fasten')
   .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {

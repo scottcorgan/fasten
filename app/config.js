@@ -3,11 +3,14 @@ angular.module('Fasten')
     $locationProvider.html5Mode(true);
     
     $routeProvider
-      .when('/', {
-        templateUrl: '/templates/home.html',
+      .when('/hooks', {
+        templateUrl: '/templates/hooks.html',
         resolve: {
           user: authenciateUser
         }
+      })
+      .when('/hooks/:endpoint*', {
+        templateUrl: '/templates/hook.html'
       })
       .when('/login', {
         templateUrl: '/templates/login.html'
@@ -16,7 +19,7 @@ angular.module('Fasten')
         templateUrl: '/templates/settings.html'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/hooks'
       });
     
     narratorProvider.configure({
