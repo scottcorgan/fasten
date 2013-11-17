@@ -1,5 +1,5 @@
 angular.module('Fasten')
-  .factory('User', function ($q, narrator, $location, $rootScope) {
+  .factory('User', function ($q, narrator, $location, $rootScope, $timeout) {
     var _user;
     var scope = $rootScope.$new();
     
@@ -27,9 +27,10 @@ angular.module('Fasten')
             authorization: user.firebaseAuthToken
           };
           
-          $rootScope._user = user;
-          
-          d.resolve(user);
+          $timeout(function () {
+            $rootScope._user = user;
+            d.resolve(user);
+          });
         });
         
         return d.promise;

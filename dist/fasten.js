@@ -607,14 +607,13 @@ angular.module('Fasten')
         });
       }
       
-      
       return d.promise;
     }
     
     return hooks;
   });
 angular.module('Fasten')
-  .factory('User', function ($q, narrator, $location, $rootScope) {
+  .factory('User', function ($q, narrator, $location, $rootScope, $timeout) {
     var _user;
     var scope = $rootScope.$new();
     
@@ -642,9 +641,10 @@ angular.module('Fasten')
             authorization: user.firebaseAuthToken
           };
           
-          $rootScope._user = user;
-          
-          d.resolve(user);
+          $timeout(function () {
+            $rootScope._user = user;
+            d.resolve(user);
+          });
         });
         
         return d.promise;
@@ -706,6 +706,18 @@ angular.module('Fasten')
       }
       
       return User.whenLoggedIn();
+    }
+    
+    function hooks (User, $q, hooks, $timeout) {
+      var d = $q.defer();
+      
+      User.whenLoggedIn().then(function () {
+        hooks.all().then(function (hooks) {
+          d.resolve(hooks);
+        });
+      });
+      
+      return d.promise;
     }
   });
 angular.module('Fasten')

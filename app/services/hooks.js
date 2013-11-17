@@ -16,7 +16,6 @@ angular.module('Fasten')
         });
       }
       
-      
       return d.promise;
     }
     

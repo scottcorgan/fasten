@@ -35,4 +35,16 @@ angular.module('Fasten')
       
       return User.whenLoggedIn();
     }
+    
+    function hooks (User, $q, hooks, $timeout) {
+      var d = $q.defer();
+      
+      User.whenLoggedIn().then(function () {
+        hooks.all().then(function (hooks) {
+          d.resolve(hooks);
+        });
+      });
+      
+      return d.promise;
+    }
   });
