@@ -1,11 +1,8 @@
 {
   "name": "fasten",
   "version": "0.0.0",
-  "description": "fasten ======",
-  "main": "app.js",
-  "engines": {
-    "node": "0.10.x"
-  },
+  "description": "",
+  "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,16 +15,10 @@
   "bugs": {
     "url": "https://github.com/scottcorgan/fasten/issues"
   },
-  "dependencies": {
-    "mongoose": "~3.8.0",
-    "feedback": "~0.3.0",
-    "express": "~3.4.4",
-    "socket.io": "~0.9.16",
-    "firebase-token-generator": "~0.1.4",
-    "firebase": "~0.6.11",
-    "hat": "0.0.3",
-    "lodash": "~2.3.0",
-    "async": "~0.2.9",
-    "pretty-print": "~0.2.2"
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }

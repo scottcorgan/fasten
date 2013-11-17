@@ -1,0 +1,10 @@
+{
+  "name": "fasten",
+  "root": "./",
+  "clean_urls": true,
+  "cache_control": {},
+  "routes": {
+    "/login": "/index.html",
+    "/settings": "/index.html"
+  }
+}
