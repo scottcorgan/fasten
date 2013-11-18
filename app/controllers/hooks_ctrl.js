@@ -2,6 +2,7 @@ angular.module('Fasten')
   .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {
     User.set($rootScope._user);
     
+    $scope.loading = true;
     $scope.User = User;
     $scope.hooks = [];
     
@@ -11,6 +12,7 @@ angular.module('Fasten')
       userWatcher();
       
       hooks.all().then(function (hooks) {
+        $scope.loading = false;
         $scope.hooks = hooks;
       });
     });
@@ -46,6 +48,10 @@ angular.module('Fasten')
       $scope.newHookTitle = null;
       $scope.newHookEndpoint = null;
       $scope.newHookDomain = null;
+    };
+    
+    $scope.haveNoHooks = function () {
+      return hooks.length === 0 && !loading;
     };
     
   });

@@ -733,6 +733,7 @@ angular.module('Fasten')
   .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {
     User.set($rootScope._user);
     
+    $scope.loading = true;
     $scope.User = User;
     $scope.hooks = [];
     
@@ -742,6 +743,7 @@ angular.module('Fasten')
       userWatcher();
       
       hooks.all().then(function (hooks) {
+        $scope.loading = false;
         $scope.hooks = hooks;
       });
     });
@@ -779,6 +781,10 @@ angular.module('Fasten')
       $scope.newHookDomain = null;
     };
     
+    $scope.haveNoHooks = function () {
+      return hooks.length === 0 && !loading;
+    };
+    
   });
 angular.module('Fasten')
   .controller('LoginCtrl', function ($scope, $rootScope, $timeout, User, $location) {
@@ -789,7 +795,7 @@ angular.module('Fasten')
     $scope.login = function () {
       $scope.loading = true;
       User.login($scope.email, $scope.password).then(function () {
-        $scope.loadig = false;
+        $scope.loading = false;
         $location.path('/');
       });
     };

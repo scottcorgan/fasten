@@ -18,8 +18,12 @@
     <br>
   </div>
   
-  <div ng-show="hooks.length == 0">
+  <div ng-show="haveNoHooks()">
     You have no hooks.
+  </div>
+  
+  <div class="loading" ng-show="loading">
+    Loading hooks ...
   </div>
   
   <div ng-repeat="hook in hooks | orderBy:'created_at'">

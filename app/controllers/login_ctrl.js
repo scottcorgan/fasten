@@ -7,7 +7,7 @@ angular.module('Fasten')
     $scope.login = function () {
       $scope.loading = true;
       User.login($scope.email, $scope.password).then(function () {
-        $scope.loadig = false;
+        $scope.loading = false;
         $location.path('/');
       });
     };
