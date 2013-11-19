@@ -1,6 +1,6 @@
 body,html{
   color:#333;
-  font:300 14px/21px 'Helvetica Neue', Helvetica, Arial;
+  font:300 15px/22px 'Helvetica Neue', Helvetica, Arial;
   height:100%;
   margin:0;
   padding:0;
@@ -11,6 +11,7 @@ body,html{
   -webkit-box-sizing:border-box;
   -moz-box-sizing:border-box;
   box-sizing:border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 hr{
@@ -26,7 +27,20 @@ ul{
   padding:0;
 }
 
+ol{
+  margin:0 0 0 20px;
+  padding:0;
+}
+
+ol li{
+  margin-bottom:30px;
+}
+
 a{
+  text-decoration: none;
+}
+
+a:hover{
   text-decoration: none;
 }
 
@@ -36,7 +50,13 @@ a{
 }
 
 h1,h2,h3,h4,h5,h6{
-  margin:0;
+  font-weight:300;
+}
+
+h3{
+  font-size:20px;
+  font-weight:500;
+  margin-bottom:30px;
 }
 
 input[type="text"]{
@@ -65,12 +85,19 @@ button{
   vertical-align: top;
 }
 
+.dropdown-menu li.active a,
+.dropdown-menu li.active a:hover{
+  background:#eee;
+  color:#333;
+}
+
 .ng-cloak{
   display:none;
 }
 
 .pull-right{
   float:right;
+  vertical-align: top;
 }
 
 .btn{
@@ -82,6 +109,58 @@ button{
   height:40px;
   line-height:36px;
   padding:0 20px;
+}
+
+.f-avatar{
+  bottom:30px;
+  cursor:pointer;
+  display:block;
+  font-size:12px;
+  line-height:40px;
+  left:30px;
+  position:absolute;
+  width:190px;
+}
+
+.f-avatar img{
+  border-radius:20px;
+  height:40px;
+  display:inline-block;
+  width:40px;
+  vertical-align: top;
+}
+
+.f-avatar .dropdown-menu{
+  border-radius:0px;
+  border:0;
+  color:#333;
+  font-weight:100;
+  margin-bottom:10px;
+  padding:8px 0;
+  
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+
+.f-avatar .dropdown-menu li {
+  display:block;
+  width:100%;
+}
+.f-avatar .dropdown-menu a {
+  display:block;
+  padding:8px 30px;
+}
+
+.f-avatar .dropdown-menu:after {
+  position: absolute;
+  bottom: -6px;
+  left: 14px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  border-left: 6px solid transparent;
+  content: '';
 }
 
 .f-header{

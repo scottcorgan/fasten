@@ -12,9 +12,18 @@ angular.module('Fasten')
       .when('/hooks/:endpoint*', {
         templateUrl: '/templates/hook.html'
       })
-      // .when('/login', {
-      //   templateUrl: '/templates/login.html'
-      // })
+      .when('/docs', {
+        templateUrl: '/templates/docs.html',
+        resolve: {
+          user: authenciateUser
+        }
+      })
+      .when('/integrations', {
+        templateUrl: '/templates/integrations.html',
+        resolve: {
+          user: authenciateUser
+        }
+      })
       .when('/settings', {
         templateUrl: '/templates/settings.html',
         resolve: {
@@ -26,7 +35,8 @@ angular.module('Fasten')
       });
     
     narratorProvider.configure({
-      host: 'http://localhost:4000',
+      // host: 'http://localhost:4000',
+      host: 'http://api.fasten.io'
     });
     
     function authenciateUser ($q, User, $location, $timeout) {

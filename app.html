@@ -6,14 +6,19 @@
     
     <title>Fasten webhooks to web sockets</title>
     
+    <link rel="shortcut icon" href="/img/favicon.png?v=6" />
+    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/molten.css">
     <link rel="stylesheet" href="/styles/app.css">
     
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
     <script src='//js.userbin.com?992169816415538'></script>
+    
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
@@ -27,10 +32,23 @@
       
       <nav>
         <a href="/hooks" ng-class="{active: isCurrentPath('/hooks')}">Hooks</a>
-        <a href="/settings" ng-class="{active: isCurrentPath('/settings')}">Settings</a>
-        <a href="/help">Help</a>
-        <a href="" class="bottom" ng-click="User.logout()">Logout</a>
+        <a href="/docs" ng-class="{active: isCurrentPath('/docs')}">Docs</a>
+        <a href="/integrations" ng-class="{active: isCurrentPath('/integrations')}">Integrations</a>
       </nav>
+      
+      <div class="f-avatar dropup">
+        <a href="" class="dropdown-toggle">
+          <img ng-src="{{User.image}}" alt="{{User.email}}">
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-class="{active: isCurrentPath('/settings')}">
+            <a href="/settings">Settings</a>
+          </li>
+          <li>
+            <a href="" ng-click="User.logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
     </header>
     
     <section class="content">

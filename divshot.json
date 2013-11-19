@@ -7,7 +7,8 @@
     "/": "/index.html",
     "/hooks**": "/app.html",
     "/hooks/**": "/app.html",
-    "/login": "/app.html",
-    "/settings": "/app.html"
+    "/settings": "/app.html",
+    "/integrations": "/app.html",
+    "/docs": "/app.html"
   }
 }

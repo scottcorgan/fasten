@@ -23,6 +23,7 @@ module.exports = function (grunt) {
       dist: {
         dest: 'dist/<%= pkg.name %>.js',
         src: [
+          'vendor/ui-bootstrap-0.6.0.js',
           'vendor/angular-route.js',
           'vendor/angular-cookies.js',
           'vendor/narrator.js',
@@ -36,6 +37,14 @@ module.exports = function (grunt) {
       }
     },
     
+    divshot: {
+      server: {
+        options: {
+          port: 9999
+        }
+      }
+    },
+        
     watch: {
       scripts: {
         files: ['app/**/*.js'],
@@ -44,10 +53,13 @@ module.exports = function (grunt) {
     }
   });
   
-  grunt.loadNpmTasks('grunt-contrib-concat');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-divshot');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
   // Tasks
   grunt.registerTask('build', ['concat']);
+  grunt.registerTask('server', ['divshot', 'watch']);
+  grunt.registerTask('deploy', ['build', 'divshot:push:production']);
 };
