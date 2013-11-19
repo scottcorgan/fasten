@@ -1,9 +1,106 @@
 body,html{
+  color:#333;
+  font:300 14px/21px 'Helvetica Neue', Helvetica, Arial;
   height:100%;
+  margin:0;
+  padding:0;
   width:100%;
+}
+
+hr{
+  background:#eee;
+  border:0;
+  height:1px;
+  margin:30px 0;
+}
+
+ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+a{
+  text-decoration: none;
 }
 
 .container{
   height:100%;
   width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin:0;
+}
+
+input[type="text"]{
+  border:1px solid #ddd;
+  border-radius:2px;
+  height:30px;
+  font-size:14px;
+  padding:0 10px;
+}
+
+input[type="text"]:focus{
+  outline:none !important;
+}
+
+.pull-right{
+  float:right;
+}
+
+.btn{
+  border:2px solid #333;
+  border-radius:2px;
+  color:#333;
+  display:inline-block;
+  font-weight:500;
+  padding:8px 20px;
+}
+
+.f-header{
+  /*background:#333;*/
+  color:#fff;
+  display:table;
+  height:100%;
+  
+  background: #f47709; /* Old browsers */
+  background: -moz-linear-gradient(top,  #f47709 0%, #f79604 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f47709), color-stop(100%,#f79604)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #f47709 0%,#f79604 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #f47709 0%,#f79604 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #f47709 0%,#f79604 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #f47709 0%,#f79604 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47709', endColorstr='#f79604',GradientType=0 ); /* IE6-9 */
+}
+
+.f-header h1{
+  left:30px;
+  position:absolute;
+  top:30px;
+}
+
+.f-header a{
+  color:#fff;
+}
+
+.f-header nav{
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.f-header nav a{
+  border-bottom:1px solid rgba(255,255,255,0);
+  border-top:1px solid rgba(255,255,255,0);
+  display:block;
+  padding:8px 30px;
+}
+
+.f-header nav a.active{
+  border-top-color:rgba(255,255,255,0.15);
+  border-bottom-color:rgba(255,255,255,0.15);
+}
+
+.f-content{
+  padding:30px;
 }

@@ -6,7 +6,7 @@ angular.module('Fasten')
     $scope.User = User;
     $scope.hooks = [];
     
-    var userWatcher = $scope.$watch(User.get, function (user) {
+    var userWatcher = $scope.$watch('User', function (user) {
       if (!user) return;
       
       userWatcher();
@@ -15,7 +15,7 @@ angular.module('Fasten')
         $scope.loading = false;
         $scope.hooks = hooks;
       });
-    });
+    }, true);
 
     $scope.createHook = function () {
       var domains = _.map($scope.newHookDomain.split(','), function (domain) {

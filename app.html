@@ -13,20 +13,27 @@
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+    <script src='//js.userbin.com?992169816415538'></script>
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <div class="grid rows split70">
-    <header class="bar">
-      <nav style="float:right">
-        <a href="/hooks">Hooks</a>
-        <a href="/settings">Settings</a>
-        <a href="" ng-click="User.logout()">Logout</a>
+  <div class="grid columns split250">
+    <header class="bar f-header">
+      <h1>
+        <a href="/hooks">
+          <img src="/img/logo.png" width="40" alt="Fasten webhooks to web sockets">
+        </a>
+      </h1>
+      
+      <nav>
+        <a href="/hooks" ng-class="{active: isCurrentPath('/hooks')}">Hooks</a>
+        <a href="/settings" ng-class="{active: isCurrentPath('/settings')}">Settings</a>
+        <a href="" class="bottom" ng-click="User.logout()">Logout</a>
       </nav>
-      <h1><a href="/hooks">Fasten</a></h1>
     </header>
+    
     <section class="content">
-      <div ng-view></div>
+      <div ng-view class="f-content"></div>
     </section>
   </div>
   

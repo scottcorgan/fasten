@@ -1,14 +1,22 @@
 <div ng-controller="LoginCtrl" >
-  <form ng-hide="User.get()">
-    <label>Email</label><br>
-    <input type="text" ng-model="email">
-    <br>
-    <label>Password</label><br>
-    <input type="password" ng-model="password">
-    <br>
-    <span style="color:red">{{formError}}</span>
-    <hr>
-    <button ng-click="login()">Login</button> <!-- or <button ng-click="signup()">Signup</button> -->
-    <div ng-show="loading">Logging you in</div>
-  </form>
+  <!-- put this on a public page -->
+  <a href="" ng-click="User.login()">Log in</a>
+  or
+  <a href="" class="ub-signup">Sign up</a>
+
+
+  <a href="" ng-click="User.logout()">Log out</a>
+
+<!-- <form ng-hide="User.get()">
+  <label>Email</label><br>
+  <input type="text" ng-model="email">
+  <br>
+  <label>Password</label><br>
+  <input type="password" ng-model="password">
+  <br>
+  <span style="color:red">{{formError}}</span>
+  <hr>
+  <button ng-click="login()">Login</button>
+  <div ng-show="loading">Logging you in</div>
+</form> -->
 </div>

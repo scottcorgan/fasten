@@ -4,9 +4,9 @@
   "clean_urls": true,
   "cache_control": {},
   "routes": {
-    "/hooks**": "/index.html",
-    "/hooks/**": "/index.html",
-    "/login": "/index.html",
-    "/settings": "/index.html"
+    "/hooks**": "/app.html",
+    "/hooks/**": "/app.html",
+    "/login": "/app.html",
+    "/settings": "/app.html"
   }
 }

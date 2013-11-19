@@ -23,7 +23,8 @@ module.exports = function (grunt) {
       dist: {
         dest: 'dist/<%= pkg.name %>.js',
         src: [
-          'vendor/angular-route.min.js',
+          'vendor/angular-route.js',
+          'vendor/angular-cookies.js',
           'vendor/narrator.js',
           'app/app.js',
           'app/providers/**/*.js',

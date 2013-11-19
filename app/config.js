@@ -16,7 +16,10 @@ angular.module('Fasten')
         templateUrl: '/templates/login.html'
       })
       .when('/settings', {
-        templateUrl: '/templates/settings.html'
+        templateUrl: '/templates/settings.html',
+        resolve: {
+          user: authenciateUser
+        }
       })
       .otherwise({
         redirectTo: '/hooks'
@@ -26,25 +29,16 @@ angular.module('Fasten')
       host: 'http://localhost:4000',
     });
     
-    function authenciateUser ($q, User) {
-      if (User.get()) {
-        var d = $q.defer();
-        d.resolve(User.get());
-        return d.promise;
-      }
-      
-      return User.whenLoggedIn();
-    }
-    
-    function hooks (User, $q, hooks, $timeout) {
+    function authenciateUser ($q, User, $location, $timeout) {
       var d = $q.defer();
       
-      User.whenLoggedIn().then(function () {
-        hooks.all().then(function (hooks) {
-          d.resolve(hooks);
-        });
-      });
-      
-      return d.promise;
-    }
+      if (Userbin.user()) {
+        d.resolve(Userbin.user());
+      }
+      else {
+        $location.path('/login');
+      }
+       
+      return User.whenLoggedIn();
+    }    
   });

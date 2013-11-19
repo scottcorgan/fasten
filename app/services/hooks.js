@@ -1,7 +1,11 @@
 angular.module('Fasten')
-  .factory('hooks', function ($q, api) {
+  .factory('hooks', function ($q, api, $rootScope, $cacheFactory) {
     var _allHooks = [];
     var hooks = api.hooks;
+    
+    $rootScope.$on('logout.success', function () {
+      _allHooks = [];
+    });
     
     hooks.all = function (refresh) {
       var d = $q.defer();

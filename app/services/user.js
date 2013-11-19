@@ -1,7 +1,19 @@
 angular.module('Fasten')
-  .factory('User', function ($q, narrator, $location, $rootScope, $timeout) {
+  .factory('User', function ($q, narrator, $location, $rootScope, $timeout, $http, narrator, $cookies) {
     var _user;
     var scope = $rootScope.$new();
+    var API_HOST = narrator.host;
+    
+    Userbin.on('login.success logout.success login.error', $rootScope.$broadcast, $rootScope);
+    
+    $rootScope.$on('login.success', function ($e, user) {
+      $location.path('/hooks');
+    });
+    
+    $rootScope.$on('logout.success', function () {
+      $location.path('/login');
+      narrator.headers = {};
+    });
     
     var User = {
       get: function () {
@@ -19,38 +31,44 @@ angular.module('Fasten')
       whenLoggedIn: function () {
         var d = $q.defer();
         
-        User.auth = new FirebaseSimpleLogin(fastenRef, function(err, user) {
-          if (err) return console.error('error logging in');
-          if (!user) return $location.path('/login');
+        if (Userbin.user()) {
+          resolveUser(Userbin.user());
+          return d.promise;
+        }
+        else {
+          Userbin.on('ready', function () {
+            var user = Userbin.user();
+            
+            if (user) {
+              return $timeout(function () {
+                resolveUser(user);
+              });
+            }
+            
+            $location.path('/login');
+          });
+        }
+        
+        function resolveUser (user) {
+          var session = JSON.parse($cookies._ubd);
           
           narrator.headers = {
-            authorization: user.firebaseAuthToken
+            authorization: session.id
           };
           
-          $timeout(function () {
-            $rootScope._user = user;
-            d.resolve(user);
-          });
-        });
+          _.extend(User, user);
+          d.resolve(User);
+        }
         
         return d.promise;
       },
       
       login: function (email, password) {
-        var promise = User.whenLoggedIn();
-        
-        User.auth.login('password', {
-          email: email,
-          password: password
-        });
-        
-        return promise;
+        Userbin.auth('userbin.login');
       },
       
       logout: function () {
-        User.auth.logout();
-        User.set(null);
-        $location.path('/login');
+        Userbin.auth('userbin.logout');
       }
     };
     
