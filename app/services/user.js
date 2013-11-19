@@ -11,8 +11,7 @@ angular.module('Fasten')
     });
     
     $rootScope.$on('logout.success', function () {
-      $location.path('/login');
-      narrator.headers = {};
+      window.location = '/?action=logout';
     });
     
     var User = {

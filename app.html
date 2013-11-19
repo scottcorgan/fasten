@@ -7,7 +7,7 @@
     <title>Fasten webhooks to web sockets</title>
     
     <link rel="stylesheet" href="/styles/molten.css">
-    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/app.css">
     
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
@@ -17,7 +17,7 @@
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <div class="grid columns split250">
+  <div class="grid columns split250" ng-cloak>
     <header class="bar f-header">
       <h1>
         <a href="/hooks">

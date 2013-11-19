@@ -1696,8 +1696,7 @@ angular.module('Fasten')
     });
     
     $rootScope.$on('logout.success', function () {
-      $location.path('/login');
-      narrator.headers = {};
+      window.location = '/?action=logout';
     });
     
     var User = {
@@ -1773,9 +1772,9 @@ angular.module('Fasten')
       .when('/hooks/:endpoint*', {
         templateUrl: '/templates/hook.html'
       })
-      .when('/login', {
-        templateUrl: '/templates/login.html'
-      })
+      // .when('/login', {
+      //   templateUrl: '/templates/login.html'
+      // })
       .when('/settings', {
         templateUrl: '/templates/settings.html',
         resolve: {
@@ -1797,7 +1796,8 @@ angular.module('Fasten')
         d.resolve(Userbin.user());
       }
       else {
-        $location.path('/login');
+        d.reject();
+        window.location = '/?action=login';
       }
        
       return User.whenLoggedIn();
