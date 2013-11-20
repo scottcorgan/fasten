@@ -1,2 +1,64 @@
 <h2>Docs</h2>
+<p><em>Fasten</em> should be so easy, you only have to look here once! But, if you decide to come back again, sweet!</p>
 <hr>
+
+<h3>Creating a new hook</h3>
+
+<ol>
+  <li>
+    <p>Head on over the your <a href="/hooks">hooks dashboard</a>.</p>
+  </li>
+  <li>
+    <p>Click on "Create a new hook"</p>
+  </li>
+  <li>
+    <p>Fill in the following information for the hook:</p>
+    <ul>
+      <li><strong>Title</strong> - a human readable title that helps you find the hook within the dashboard. This is private to you and never made public.</li>
+      <li><strong>Endpoint</strong> - the path of your webhook that uniquely identifies it. This becomes the end if the full webhook url.</li>
+      <li><strong>Domains</strong> - comma delimmed white list of domains. These will be the domains that are allowed to access this webhook.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Click "Create hook" and go brab about it!</p>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Embedding the hook into your frontend/static app</h3>
+<ol>
+  <li>
+    <p>Once you've created a new hook in the <a href="/hooks">hooks dashboard</a>, go get your hook key. It will look something like this:</p>
+    <p><code>0c2a15d6b32339776de5ea9c887581c4</code></p>
+  </li>
+  <li>
+   <p>Include the <em>Fasten</em> script into your app anywhere you'd like:</p> 
+   <p><code>&lt;script src=&quot;http://www.fasten.io/fasten.js&quot;&gt;&lt;/script&gt;</code></p>
+  </li>
+  <li>
+    <p>Use the following code&mdash;anywhere after the previous script tag&mdash;to connect to that webhook over a web socket:</p>
+    <pre><code>var fasten = Fasten.connect('your/fasten/hook/path', '0c2a15d6b32339776de5ea9c887581c4');
+ 
+fasten.hook(function (data) {
+  // Do amazing stuff here!
+});</code>
+</pre>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Changing your password</h3>
+<p>If, at any time, you need to change your password, you can go to <a href="/settings">settings</a> and show that password who's boss!</p>
+
+
+<hr>
+
+<h3>Deleting your account</h3>
+<p>If by chance the world is ending and you need to quickly delete your account, you can easily go to <a href="/settings">settings</a> and click "Delete my account". But, it won't be something to brag about.</p>
+
+<hr>
+
+<h3>Need more help?</h3>
+<p>Please, don't hesitate to <strong><a href="mailto:scottcorgan@gmail.com">contact</a></strong> a real person!!</p>

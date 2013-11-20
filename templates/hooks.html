@@ -1,5 +1,5 @@
 <div ng-controller="HooksCtrl">
-  <a href="" class="pull-right btn primary" ng-click="showHookComposer = true">Add a new hook</a>
+  <a href="" class="pull-right btn primary" ng-click="showHookComposer = true">Create a new hook</a>
   
   <h2>Hooks</h2>
   <hr>
@@ -9,9 +9,9 @@
     <input type="text" ng-model="newHookTitle"><br><br>
     <label for="">Endpoint</label><br>
     http://fasten.io/hooks/ <input type="text" ng-model="newHookEndpoint"><br><br>
-    <label for="">Domain</label><br>
+    <label for="">Domains</label><br>
     <input type="text" ng-model="newHookDomain"><br>
-    <button ng-click="createHook()">Create Hook</button> <a href="" ng-click="showHookComposer = false">Cancel</a>
+    <button ng-click="createHook()">Create hook</button> <a href="" ng-click="showHookComposer = false">Cancel</a>
     <br>
     <br>
   </div>

@@ -25,6 +25,7 @@ module.exports = function (grunt) {
         src: [
           'vendor/ui-bootstrap-0.6.0.js',
           'vendor/angular-route.js',
+          'vendor/angular-sanitize.js',
           'vendor/angular-cookies.js',
           'vendor/narrator.js',
           'app/app.js',
