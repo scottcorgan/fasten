@@ -4966,35 +4966,6 @@ angular.module('ngCookies', ['ng']).
 
 })(window, window.angular);
 
-angular.module('gist', []);
-
-angular.module('gist')
-  .directive('gist', function () {
-    return {
-      restrict: 'E',
-      replace: true,
-      template: '<div></div>',
-      link: function(scope, elm, attrs) {
-        var gistId = attrs.id;
-
-        var iframe = document.createElement('iframe');
-        iframe.setAttribute('width', '100%');
-        iframe.setAttribute('frameborder', '0');
-        iframe.id = "gist-" + gistId;
-        elm[0].appendChild(iframe);
-
-        var iframeHtml = '<html><head><base target="_parent"><style>table{font-size:12px;}</style></head><body onload="parent.document.getElementById(\'' + iframe.id + '\').style.height=document.body.scrollHeight + \'px\'"><scr' + 'ipt type="text/javascript" src="https://gist.github.com/' + gistId + '.js"></sc'+'ript></body></html>';
-
-        var doc = iframe.document;
-        if (iframe.contentDocument) doc = iframe.contentDocument;
-        else if (iframe.contentWindow) doc = iframe.contentWindow.document;
-
-        doc.open();
-        doc.writeln(iframeHtml);
-        doc.close();
-      }
-    };
-  });
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function (Http, $http) {
   Http.prototype._request = function (options, callback) {
@@ -5562,7 +5533,7 @@ module.exports = function () {
 },{}]},{},[3])
 ;
 var fastenRef = new Firebase('https://fasten.firebaseio.com');
-angular.module('Fasten', ['ngRoute', 'ngCookies', 'ngSanitize', 'narrator', 'ui.bootstrap', 'gist']);
+angular.module('Fasten', ['ngRoute', 'ngCookies', 'ngSanitize', 'narrator', 'ui.bootstrap']);
 angular.module('Fasten')
   .factory('api', function (narrator) {
     var api = {
@@ -5711,7 +5682,8 @@ angular.module('Fasten')
     
     narratorProvider.configure({
       // host: 'http://localhost:4000',
-      host: 'http://api.fasten.io'
+      // host: 'http://api.fasten.io'
+      host: 'http://api.fasten.dev:4000'
     });
     
     function authenciateUser ($q, User, $location, $timeout) {

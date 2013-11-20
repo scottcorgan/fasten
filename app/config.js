@@ -36,7 +36,8 @@ angular.module('Fasten')
     
     narratorProvider.configure({
       // host: 'http://localhost:4000',
-      host: 'http://api.fasten.io'
+      // host: 'http://api.fasten.io'
+      host: 'http://api.fasten.dev:4000'
     });
     
     function authenciateUser ($q, User, $location, $timeout) {

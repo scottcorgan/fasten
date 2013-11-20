@@ -1,6 +1,6 @@
 var Fasten = function (_endpoint, token) {
-  var STREAM_SERVER = 'http://fasten.io:80/';
-  // var STREAM_SERVER = 'http://localhost:4000/';
+  var STREAM_SERVER = 'http://stream.fasten.io:80/';
+  // var STREAM_SERVER = 'http://stream.fasten.dev:4000/';
   
   var _token = this._token = token;
   var _endpoint = this._endpoint = _endpoint;
