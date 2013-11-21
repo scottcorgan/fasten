@@ -5655,6 +5655,12 @@ angular.module('Fasten')
           user: authenciateUser
         }
       })
+      .when('/hooks/create', {
+        templateUrl: '/templates/hooks_create.html',
+        resolve: {
+          user: authenciateUser
+        }
+      })
       .when('/hooks/:endpoint*', {
         templateUrl: '/templates/hook.html'
       })
@@ -5702,7 +5708,7 @@ angular.module('Fasten')
 angular.module('Fasten')
   .controller('AppCtrl', function ($scope, $rootScope, User, $location, $location) {
     $scope.User = User;
-    
+    console.log(User);
     $scope.isCurrentPath = function (path) {
       return $location.path() === path;
     };

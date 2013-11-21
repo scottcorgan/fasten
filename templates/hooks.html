@@ -1,7 +1,7 @@
 <div ng-controller="HooksCtrl">
-  <div class="hooks-wrapper" ng-class="{'go-to-background': showHookComposer}">
+  <div class="hooks-wrapper">
     <h2 class="inline-block">Hooks</h2>
-    <a href="" class="btn primary create-hook" ng-click="showHookComposer = true">Create a new hook</a>
+    <a href="/hooks/create" class="button create-hook">Create hook</a>
     
     <hr>
     
@@ -16,17 +16,5 @@
     <div ng-repeat="hook in hooks | orderBy:'created_at'">
       - <strong>{{hook.title}}:</strong> {{hook.endpoint}} ... <strong>Domains</strong>: {{hook.domains}} (<a href="" ng-click="removeHook(hook)">Delete</a>)
     </div>
-  </div>
-  
-  <div class="hook-composer" ng-class="{open: showHookComposer}">
-    <label for="">Title</label><br>
-    <input type="text" ng-model="newHookTitle"><br><br>
-    <label for="">Endpoint</label><br>
-    http://fasten.io/hooks/ <input type="text" ng-model="newHookEndpoint"><br><br>
-    <label for="">Domains</label><br>
-    <input type="text" ng-model="newHookDomain"><br>
-    <button ng-click="createHook()">Create hook</button> <a href="" ng-click="showHookComposer = false">Cancel</a>
-    <br>
-    <br>
   </div>
 </div>
