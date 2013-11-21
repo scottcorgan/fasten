@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/molten.css">
-    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/app1.css">
     
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
     <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
@@ -22,7 +22,48 @@
     <script src="/dist/fasten.js"></script>
 </head>
 <body ng-controller="AppCtrl">
-  <div class="grid columns split250" ng-cloak>
+
+  <div class="grid rows split70" ng-cloak>
+    <header class="bar f-header">
+      <h1>
+        <a href="/hooks">
+          <img src="/img/logo-orange.png" width="40" alt="">
+        </a>
+      </h1>
+      
+      <nav>
+        <a href="/hooks" ng-class="{active: isCurrentPath('/hooks')}">Hooks</a>
+        <a href="/docs" ng-class="{active: isCurrentPath('/docs')}">Docs</a>
+        <a href="/integrations" ng-class="{active: isCurrentPath('/integrations')}">Integrations</a>
+      </nav>
+      
+      <div class="f-avatar dropdown">
+        <a href="" class="dropdown-toggle">
+          <img ng-src="{{User.image}}" alt="{{User.email}}">
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-class="{active: isCurrentPath('/settings')}">
+            <a href="/settings">Settings</a>
+          </li>
+          <li>
+            <a href="" ng-click="User.logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    
+    <section class="content">
+      <div ng-view class="f-content f-container"></div>
+      
+      <footer>
+        Powered by <a href="http://divshot.io" target="_blank">Divshot.io</a>
+      </footer>
+    </section>
+    
+  </div>
+
+
+  <!-- <div class="grid columns split250" ng-cloak>
     <header class="bar f-header">
       <h1>
         <a href="/hooks">
@@ -54,7 +95,7 @@
     <section class="content">
       <div ng-view class="f-content"></div>
     </section>
-  </div>
+  </div> -->
   
 </body>
 </html>

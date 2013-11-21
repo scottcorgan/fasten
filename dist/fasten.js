@@ -5655,6 +5655,12 @@ angular.module('Fasten')
           user: authenciateUser
         }
       })
+      .when('/hooks/create', {
+        templateUrl: '/templates/hooks_create.html',
+        resolve: {
+          user: authenciateUser
+        }
+      })
       .when('/hooks/:endpoint*', {
         templateUrl: '/templates/hook.html'
       })
@@ -5681,7 +5687,6 @@ angular.module('Fasten')
       });
     
     narratorProvider.configure({
-      // host: 'http://localhost:4000',
       host: 'http://api.fasten.io'
       // host: 'http://api.fasten.dev:4000'
     });
@@ -5703,7 +5708,7 @@ angular.module('Fasten')
 angular.module('Fasten')
   .controller('AppCtrl', function ($scope, $rootScope, User, $location, $location) {
     $scope.User = User;
-    
+    console.log(User);
     $scope.isCurrentPath = function (path) {
       return $location.path() === path;
     };
