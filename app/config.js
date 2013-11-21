@@ -15,9 +15,12 @@ angular.module('Fasten')
           user: authenciateUser
         }
       })
-      .when('/hooks/:endpoint*', {
-        templateUrl: '/templates/hook.html'
-      })
+      // .when('/hooks/edit/:endpoint*', {
+      //   templateUrl: 'templates/edit_hook.html'
+      // })
+      // .when('/hooks/:endpoint*', {
+      //   templateUrl: '/templates/hook.html'
+      // })
       .when('/docs', {
         templateUrl: '/templates/docs.html',
         resolve: {

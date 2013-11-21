@@ -38,9 +38,12 @@ angular.module('Fasten')
     $scope.removeHook = function (hook) {
       if (!confirm('Are you sure you want to delete this?')) return;
       
+      var idx = $scope.hooks.indexOf(hook);
+      $scope.hooks.splice(idx, 1);
+      
       hooks.one(hook.endpoint).remove().then(function () {
-        var idx = $scope.hooks.indexOf(hook);
-        $scope.hooks.splice(idx, 1);
+      }, function () {
+        // handle api error here
       });
     };
     

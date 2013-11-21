@@ -5661,9 +5661,12 @@ angular.module('Fasten')
           user: authenciateUser
         }
       })
-      .when('/hooks/:endpoint*', {
-        templateUrl: '/templates/hook.html'
-      })
+      // .when('/hooks/edit/:endpoint*', {
+      //   templateUrl: 'templates/edit_hook.html'
+      // })
+      // .when('/hooks/:endpoint*', {
+      //   templateUrl: '/templates/hook.html'
+      // })
       .when('/docs', {
         templateUrl: '/templates/docs.html',
         resolve: {
@@ -5708,14 +5711,33 @@ angular.module('Fasten')
 angular.module('Fasten')
   .controller('AppCtrl', function ($scope, $rootScope, User, $location, $location) {
     $scope.User = User;
-    console.log(User);
+    
     $scope.isCurrentPath = function (path) {
       return $location.path() === path;
     };
   });
 angular.module('Fasten')
+  .controller('CreateHookCtrl', function ($scope, hooks, $location) {
+    
+    $scope.createHook = function () {
+      var domains = _.map($scope.newHookDomain.split(','), function (domain) {
+        return domain.replace(/ /g, '');
+      });
+      
+      var hook = {
+        title: $scope.newHookTitle,
+        endpoint: $scope.newHookEndpoint,
+        domains: domains,
+      };
+      
+      hooks.create(hook).then(function (hook) {
+        $location.path('/hooks');
+      });
+    };
+  });
+angular.module('Fasten')
   .controller('HookCtrl', function ($scope, $routeParams) {
-    $scope.endpoint = $routeParams.endpoint;
+    
   });
 angular.module('Fasten')
   .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {
@@ -5757,9 +5779,12 @@ angular.module('Fasten')
     $scope.removeHook = function (hook) {
       if (!confirm('Are you sure you want to delete this?')) return;
       
+      var idx = $scope.hooks.indexOf(hook);
+      $scope.hooks.splice(idx, 1);
+      
       hooks.one(hook.endpoint).remove().then(function () {
-        var idx = $scope.hooks.indexOf(hook);
-        $scope.hooks.splice(idx, 1);
+      }, function () {
+        // handle api error here
       });
     };
     

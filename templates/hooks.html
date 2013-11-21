@@ -1,20 +1,54 @@
 <div ng-controller="HooksCtrl">
   <div class="hooks-wrapper">
-    <h2 class="inline-block">Hooks</h2>
-    <a href="/hooks/create" class="button create-hook">Create hook</a>
+    <header>
+      <h2 class="inline-block">Hooks</h2>
+      <a href="/hooks/create" class="button create-hook">Create hook</a>
+    </header>
     
-    <hr>
-    
-    <div ng-show="haveNoHooks()">
+    <div class="padding30" ng-show="haveNoHooks()">
       You have no hooks.
     </div>
     
-    <div class="loading" ng-show="loading">
+    <div class="loading padding30" ng-show="loading">
       Loading hooks ...
     </div>
     
-    <div ng-repeat="hook in hooks | orderBy:'created_at'">
-      - <strong>{{hook.title}}:</strong> {{hook.endpoint}} ... <strong>Domains</strong>: {{hook.domains}} (<a href="" ng-click="removeHook(hook)">Delete</a>)
-    </div>
+    <section>
+      <div class="f-hook" ng-repeat="hook in hooks | orderBy:'created_at'" ng-class="{editing: showHookComposer}">
+        <div ng-hide="showHookComposer">
+          <strong>{{hook.title}}</strong>
+          
+          <div class="pull-right actions">
+            <a ng-href="" ng-click="showHookComposer = true" class="ion-compose"></a> 
+            <!-- <a href="" class="ion-ios7-close-empty" ng-click="removeHook(hook)"></a> -->
+          </div>
+          
+          <div class="endpoint">
+            <span class="host">http://hooks.fasten.io/</span>{{hook.endpoint}}
+          </div>
+          
+        </div>
+        
+        <div class="hook-composer hook-editor" ng-show="showHookComposer">
+          <a class="ion-close cancel" href="" ng-click="showHookComposer = false"></a>
+          
+          <label for="">Title</label>
+          <input type="text" ng-model="hook.title">
+          
+          <label for="">Endpoint</label>
+          <div class="input-group">
+            <span class="input-group-addon">http://hooks.fasten.io/</span>
+            <input type="text" class="form-control" ng-model="hook.endpoint">
+          </div>
+          
+          <label for="">Domains</label>
+          <input type="text" ng-model="hook.domains">
+          
+          <button ng-click="createHook()">Update hook</button>
+          <a href="" class="remove ion-trash-b pull-right"></a>
+        </div>
+      </div>
+    </section>
+    
   </div>
 </div>
