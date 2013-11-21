@@ -2,19 +2,41 @@
   <div class="hooks-wrapper">
     <header>
       <h2 class="inline-block">Hooks</h2>
-      <a href="/hooks/create" class="button create-hook">Create hook</a>
+      <a href="" ng-class="{disable: showCreateHookComposer}" ng-click="showCreateHookComposer = true" class="button create-hook">
+        <span ng-hide="showCreateHookComposer">Create hook</span>
+        <span ng-show="showCreateHookComposer">Creating hook</span>
+      </a>
     </header>
     
-    <div class="padding30" ng-show="haveNoHooks()">
-      You have no hooks.
+    <div class="padding30 no-hooks" ng-show="haveNoHooks()">
+      <p>Looks you don't have any hooks yet</p>
     </div>
     
     <div class="loading padding30" ng-show="loading">
       Loading hooks ...
     </div>
     
+    <div class="hook-composer" ng-show="showCreateHookComposer">
+      <a class="ion-close cancel" href="" ng-click="showCreateHookComposer = false"></a>
+      
+      <label for="">Title</label>
+      <input type="text" ng-model="newHookTitle">
+      
+      <label for="">Endpoint</label>
+      <div class="input-group">
+        <span class="input-group-addon">http://hooks.fasten.io/</span>
+        <input type="text" class="form-control" ng-model="newHookEndpoint">
+      </div>
+      
+      <label for="">Domains</label>
+      <input type="text" ng-model="newHookDomain">
+      
+      <span ng-show="createLoading">Creating hook ...</span>
+      <button ng-click="createHook()" ng-hide="createLoading">Create hook</button>
+    </div>
+    
     <section>
-      <div class="f-hook" ng-repeat="hook in hooks | orderBy:'created_at'" ng-class="{editing: showHookComposer}">
+      <div class="f-hook" ng-controller="HookCtrl" ng-repeat="hook in hooks | orderBy:'created_at'" ng-class="{editing: showHookComposer}">
         <div ng-hide="showHookComposer">
           <strong>{{hook.title}}</strong>
           
@@ -29,7 +51,7 @@
           
         </div>
         
-        <div class="hook-composer hook-editor" ng-show="showHookComposer">
+        <div class="hook-editor" ng-show="showHookComposer">
           <a class="ion-close cancel" href="" ng-click="showHookComposer = false"></a>
           
           <label for="">Title</label>
@@ -45,7 +67,7 @@
           <input type="text" ng-model="hook.domains">
           
           <button ng-click="createHook()">Update hook</button>
-          <a href="" class="remove ion-trash-b pull-right"></a>
+          <a href="" ng-click="removeHook(hook)" class="remove ion-trash-b pull-right"></a>
         </div>
       </div>
     </section>

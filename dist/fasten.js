@@ -5532,7 +5532,6 @@ module.exports = function () {
 };
 },{}]},{},[3])
 ;
-var fastenRef = new Firebase('https://fasten.firebaseio.com');
 angular.module('Fasten', ['ngRoute', 'ngCookies', 'ngSanitize', 'narrator', 'ui.bootstrap']);
 angular.module('Fasten')
   .factory('api', function (narrator) {
@@ -5550,6 +5549,10 @@ angular.module('Fasten')
     $rootScope.$on('logout.success', function () {
       _allHooks = [];
     });
+    
+    hooks._add = function (hook) {
+      _allHooks.push(hook);
+    };
     
     hooks.all = function (refresh) {
       var d = $q.defer();
@@ -5655,18 +5658,6 @@ angular.module('Fasten')
           user: authenciateUser
         }
       })
-      .when('/hooks/create', {
-        templateUrl: '/templates/hooks_create.html',
-        resolve: {
-          user: authenciateUser
-        }
-      })
-      // .when('/hooks/edit/:endpoint*', {
-      //   templateUrl: 'templates/edit_hook.html'
-      // })
-      // .when('/hooks/:endpoint*', {
-      //   templateUrl: '/templates/hook.html'
-      // })
       .when('/docs', {
         templateUrl: '/templates/docs.html',
         resolve: {
@@ -5717,35 +5708,16 @@ angular.module('Fasten')
     };
   });
 angular.module('Fasten')
-  .controller('CreateHookCtrl', function ($scope, hooks, $location) {
-    
-    $scope.createHook = function () {
-      var domains = _.map($scope.newHookDomain.split(','), function (domain) {
-        return domain.replace(/ /g, '');
-      });
-      
-      var hook = {
-        title: $scope.newHookTitle,
-        endpoint: $scope.newHookEndpoint,
-        domains: domains,
-      };
-      
-      hooks.create(hook).then(function (hook) {
-        $location.path('/hooks');
-      });
-    };
-  });
-angular.module('Fasten')
   .controller('HookCtrl', function ($scope, $routeParams) {
     
   });
 angular.module('Fasten')
-  .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {
+  .controller('HooksCtrl', function ($scope, $rootScope, User, $timeout, api, hooks, $rootScope) {
     User.set($rootScope._user);
     
     $scope.loading = true;
     $scope.User = User;
-    $scope.hooks = [];
+    $rootScope.hooks = [];
     
     var userWatcher = $scope.$watch('User', function (user) {
       if (!user) return;
@@ -5754,7 +5726,7 @@ angular.module('Fasten')
       
       hooks.all().then(function (hooks) {
         $scope.loading = false;
-        $scope.hooks = hooks;
+        $rootScope.hooks = hooks;
       });
     }, true);
 
@@ -5769,18 +5741,18 @@ angular.module('Fasten')
         domains: domains,
       };
       
-      hooks.create(hook).then(function (hook) {
-        $scope.hooks.push(hook);
+      hooks.create(hook).then(function (_hook) {
+        $rootScope.hooks.push(_hook);
         $scope.resetNewHookValues();
-        $scope.showHookComposer = false;
+        $scope.showCreateHookComposer = false;
       });
     };
     
     $scope.removeHook = function (hook) {
       if (!confirm('Are you sure you want to delete this?')) return;
       
-      var idx = $scope.hooks.indexOf(hook);
-      $scope.hooks.splice(idx, 1);
+      var idx = $rootScope.hooks.indexOf(hook);
+      $rootScope.hooks.splice(idx, 1);
       
       hooks.one(hook.endpoint).remove().then(function () {
       }, function () {
@@ -5795,7 +5767,7 @@ angular.module('Fasten')
     };
     
     $scope.haveNoHooks = function () {
-      return hooks.length === 0 && !loading;
+      return $rootScope.hooks.length === 0 && !$scope.loading;
     };
     
   });

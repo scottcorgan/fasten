@@ -7,6 +7,10 @@ angular.module('Fasten')
       _allHooks = [];
     });
     
+    hooks._add = function (hook) {
+      _allHooks.push(hook);
+    };
+    
     hooks.all = function (refresh) {
       var d = $q.defer();
       

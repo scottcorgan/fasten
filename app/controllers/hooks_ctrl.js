@@ -1,10 +1,10 @@
 angular.module('Fasten')
-  .controller('HooksCtrl', function ($scope, User, $timeout, api, hooks, $rootScope) {
+  .controller('HooksCtrl', function ($scope, $rootScope, User, $timeout, api, hooks, $rootScope) {
     User.set($rootScope._user);
     
     $scope.loading = true;
     $scope.User = User;
-    $scope.hooks = [];
+    $rootScope.hooks = [];
     
     var userWatcher = $scope.$watch('User', function (user) {
       if (!user) return;
@@ -13,7 +13,7 @@ angular.module('Fasten')
       
       hooks.all().then(function (hooks) {
         $scope.loading = false;
-        $scope.hooks = hooks;
+        $rootScope.hooks = hooks;
       });
     }, true);
 
@@ -28,18 +28,18 @@ angular.module('Fasten')
         domains: domains,
       };
       
-      hooks.create(hook).then(function (hook) {
-        $scope.hooks.push(hook);
+      hooks.create(hook).then(function (_hook) {
+        $rootScope.hooks.push(_hook);
         $scope.resetNewHookValues();
-        $scope.showHookComposer = false;
+        $scope.showCreateHookComposer = false;
       });
     };
     
     $scope.removeHook = function (hook) {
       if (!confirm('Are you sure you want to delete this?')) return;
       
-      var idx = $scope.hooks.indexOf(hook);
-      $scope.hooks.splice(idx, 1);
+      var idx = $rootScope.hooks.indexOf(hook);
+      $rootScope.hooks.splice(idx, 1);
       
       hooks.one(hook.endpoint).remove().then(function () {
       }, function () {
@@ -54,7 +54,7 @@ angular.module('Fasten')
     };
     
     $scope.haveNoHooks = function () {
-      return hooks.length === 0 && !loading;
+      return $rootScope.hooks.length === 0 && !$scope.loading;
     };
     
   });
