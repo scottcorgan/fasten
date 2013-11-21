@@ -38,6 +38,14 @@ module.exports = function (grunt) {
       }
     },
     
+    uglify: {
+      fasten: {
+        files: {
+          'fasten.js': 'fasten.dev.js'
+        }
+      }
+    },
+    
     divshot: {
       server: {
         options: {
@@ -56,11 +64,12 @@ module.exports = function (grunt) {
   
   // grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-divshot');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
   // Tasks
-  grunt.registerTask('build', ['concat']);
+  grunt.registerTask('build', ['concat', 'uglify']);
   grunt.registerTask('server', ['divshot', 'watch']);
   grunt.registerTask('deploy', ['build', 'divshot:push:production']);
 };

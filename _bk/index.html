@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script src="http://www.fasten.io/fasten.js"></script>
+  
+  <script>
+  var fasten = Fasten.connect('github/column');
+
+  fasten.hook(function (data) {
+    console.log(data);
+  });
+  </script>
+</head>

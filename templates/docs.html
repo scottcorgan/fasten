@@ -28,17 +28,17 @@
 
 <h3>Embedding the hook into your frontend/static app</h3>
 <ol>
-  <li>
+  <!-- <li>
     <p>Once you've created a new hook in the <a href="/hooks">hooks dashboard</a>, go get your hook key. It will look something like this:</p>
     <p><code>0c2a15d6b32339776de5ea9c887581c4</code></p>
-  </li>
+  </li> -->
   <li>
    <p>Include the <em>Fasten</em> script into your app anywhere you'd like:</p> 
    <p><code>&lt;script src=&quot;http://www.fasten.io/fasten.js&quot;&gt;&lt;/script&gt;</code></p>
   </li>
   <li>
     <p>Use the following code&mdash;anywhere after the previous script tag&mdash;to connect to that webhook over a web socket:</p>
-    <pre><code>var fasten = Fasten.connect('your/fasten/hook/path', '0c2a15d6b32339776de5ea9c887581c4');
+    <pre><code>var fasten = Fasten.connect('your/fasten/hook/path');
  
 fasten.hook(function (data) {
   // Do amazing stuff here!
