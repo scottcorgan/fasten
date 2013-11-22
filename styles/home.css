@@ -121,7 +121,9 @@ body > header a {
 }
 
 .login,
-.contact{
+.contact,
+.docs,
+.integrations{
   float:right;
   display:inline-block;
   line-height:40px;

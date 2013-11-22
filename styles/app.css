@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 body,html{
   background:#f7f7f7;
   font:300 15px/22px 'Helvetica Neue', Helvetica, Arial;
@@ -156,8 +160,10 @@ button:hover,
   color:#f47709;
 }
 
-.ng-cloak{
-  display:none;
+.alert{
+  background:none;
+  border-radius:2px;
+  margin-bottom:30px;
 }
 
 .pull-right{
@@ -326,6 +332,10 @@ button:hover,
 .hook-editor a{
   display:inline-block;
   line-height:40px;
+}
+
+.hook-editor .uneditable-endpoint{
+  margin-bottom:30px;
 }
 
 .f-avatar{

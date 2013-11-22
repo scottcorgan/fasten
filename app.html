@@ -9,15 +9,15 @@
     <link rel="shortcut icon" href="/img/favicon.png?v=6" />
     
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/molten.css">
-    <link rel="stylesheet" href="/styles/ionicons.min.css">
+    <!-- <link rel="stylesheet" href="/styles/molten.css">
+    <link rel="stylesheet" href="/styles/ionicons.min.css"> -->
     <link rel="stylesheet" href="/styles/app.css">
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
     <script src='//js.userbin.com?992169816415538'></script>
-    <script src="/dist/fasten.js"></script>
+    <script src="/scripts/app.js"></script>
 </head>
 <body ng-controller="AppCtrl">
 
@@ -53,7 +53,7 @@
     <section class="content content-wrapper" ng-cloak>
       <div ng-view class="f-content f-container"></div>
       
-      <footer>
+      <footer ng-show="hooks">
         <img src="/img/favicon-black.png" width="16" alt="">asten is powered by <a href="http://divshot.io" target="_blank">Divshot.io</a>
       </footer>
     </section>

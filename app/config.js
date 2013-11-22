@@ -6,25 +6,29 @@ angular.module('Fasten')
       .when('/hooks', {
         templateUrl: '/templates/hooks.html',
         resolve: {
-          user: authenciateUser
+          user: authenciateUser,
+          hooks: getHooks
         }
       })
       .when('/docs', {
         templateUrl: '/templates/docs.html',
         resolve: {
-          user: authenciateUser
+          user: authenciateUser,
+          hooks: getHooks
         }
       })
       .when('/integrations', {
         templateUrl: '/templates/integrations.html',
         resolve: {
-          user: authenciateUser
+          user: authenciateUser,
+          hooks: getHooks
         }
       })
       .when('/settings', {
         templateUrl: '/templates/settings.html',
         resolve: {
-          user: authenciateUser
+          user: authenciateUser,
+          hooks: getHooks
         }
       })
       .otherwise({
@@ -48,5 +52,9 @@ angular.module('Fasten')
       }
        
       return User.whenLoggedIn();
-    }    
+    }
+    
+    function getHooks (hooks) {
+      return hooks.all();
+    } 
   });

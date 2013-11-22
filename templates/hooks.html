@@ -2,14 +2,14 @@
   <div class="hooks-wrapper">
     <header>
       <h2 class="inline-block">Hooks</h2>
-      <a href="" ng-class="{disable: showCreateHookComposer}" ng-click="showCreateHookComposer = true" class="button create-hook"  scroll-to-on-click=".hook-composer" offset-top="80" container=".content-wrapper">
+      <a href="" ng-class="{disable: showCreateHookComposer}" ng-click="showCreateHookComposer = true" class="button create-hook"  scroll-to=".hook-composer" offset="80" container=".content-wrapper">
         <span ng-hide="showCreateHookComposer">Create hook</span>
         <span ng-show="showCreateHookComposer">Creating hook</span>
       </a>
     </header>
     
     <div class="padding30 no-hooks" ng-show="haveNoHooks()">
-      <p>Looks you don't have any hooks yet</p>
+      <p>Looks like you don't have any hooks yet</p>
     </div>
     
     <div class="loading padding30" ng-show="loading">
@@ -20,16 +20,25 @@
       <a class="ion-close cancel" href="" ng-click="showCreateHookComposer = false"></a>
       
       <label for="">Title</label>
+      <span class="help-block">A human readable title. This will not be public.</span>
       <input type="text" ng-model="newHookTitle">
       
       <label for="">Endpoint</label>
+      <span class="help-block">Endpoint that your webhooks will call.</span>
       <div class="input-group">
         <span class="input-group-addon">http://hooks.fasten.io/</span>
-        <input type="text" class="form-control" ng-model="newHookEndpoint">
+        <input type="text" class="form-control" ng-model="newHookEndpoint" ng-trim="true">
       </div>
       
       <label for="">Domains</label>
-      <input type="text" ng-model="newHookDomain">
+      <span class="help-block">Comma delimited list of domains allowed to use this endpoint. If left blank, it will be available to anyone.</span>
+      <input type="text" ng-model="newHookDomains">
+      
+      <div class="alert alert-danger" ng-show="hasFormErrors()">
+        <span ng-repeat="error in formErrors">
+          {{error}} <br>
+        </span>
+      </div>
       
       <span ng-show="createLoading">Creating hook ...</span>
       <button ng-click="createHook()" ng-hide="createLoading">Create hook</button>
@@ -42,7 +51,6 @@
           
           <div class="pull-right actions">
             <a ng-href="" ng-click="showHookComposer = true" class="ion-compose"></a> 
-            <!-- <a href="" class="ion-ios7-close-empty" ng-click="removeHook(hook)"></a> -->
           </div>
           
           <div class="endpoint">
@@ -55,18 +63,18 @@
           <a class="ion-close cancel" href="" ng-click="showHookComposer = false"></a>
           
           <label for="">Title</label>
-          <input type="text" ng-model="hook.title">
+          <span class="help-block">A human readable title. This will not be public.</span>
+          <input type="text" ng-model="editHook.title">
           
           <label for="">Endpoint</label>
-          <div class="input-group">
-            <span class="input-group-addon">http://hooks.fasten.io/</span>
-            <input type="text" class="form-control" ng-model="hook.endpoint">
-          </div>
+          <span class="help-block">(this cannot be changed)</span>
+          <div class="uneditable-endpoint">http://hooks.fasten.io/<strong>{{hook.endpoint}}</strong><br></div>
           
           <label for="">Domains</label>
-          <input type="text" ng-model="hook.domains">
+          <span class="help-block">Comma delimited list of domains allowed to use this endpoint. If left blank, it will be available to anyone.</span>
+          <input type="text" ng-model="editHook.domains">
           
-          <button ng-click="createHook()">Update hook</button>
+          <button ng-click="updateHook()">Update hook</button>
           <a href="" ng-click="removeHook(hook)" class="remove ion-trash-b pull-right"></a>
         </div>
       </div>

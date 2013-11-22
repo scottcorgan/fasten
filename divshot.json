@@ -1,6 +1,6 @@
 {
   "name": "fasten",
-  "root": "./",
+  "root": "./dist",
   "clean_urls": true,
   "cache_control": {},
   "routes": {

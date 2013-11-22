@@ -5,6 +5,7 @@ angular.module('Fasten')
     $scope.loading = true;
     $scope.User = User;
     $rootScope.hooks = [];
+    $scope.formErrors = [];
     
     var userWatcher = $scope.$watch('User', function (user) {
       if (!user) return;
@@ -18,21 +19,28 @@ angular.module('Fasten')
     }, true);
 
     $scope.createHook = function () {
-      var domains = _.map($scope.newHookDomain.split(','), function (domain) {
-        return domain.replace(/ /g, '');
-      });
+      var domains = hooks.parseDomains($scope.newHookDomains);
       
       var hook = {
-        title: $scope.newHookTitle,
+        title: $scope.newHookTitle || $scope.newHookEndpoint,
         endpoint: $scope.newHookEndpoint,
         domains: domains,
       };
+      
+      var errors = hooks.validateForm(hook)
+      if (errors) return $scope.formErrors = errors;
+      
+      $scope.formErrors = [];
       
       hooks.create(hook).then(function (_hook) {
         $rootScope.hooks.push(_hook);
         $scope.resetNewHookValues();
         $scope.showCreateHookComposer = false;
       });
+    };
+    
+    $scope.hasFormErrors = function () {
+      return $scope.formErrors.length > 0;
     };
     
     $scope.removeHook = function (hook) {
@@ -50,7 +58,7 @@ angular.module('Fasten')
     $scope.resetNewHookValues = function () {
       $scope.newHookTitle = null;
       $scope.newHookEndpoint = null;
-      $scope.newHookDomain = null;
+      $scope.newHookDomains = null;
     };
     
     $scope.haveNoHooks = function () {
